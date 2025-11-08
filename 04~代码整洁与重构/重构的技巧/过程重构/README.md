@@ -2,11 +2,11 @@
 
 以典型的电商系统为例，其往往某个操作会包含复杂的逻辑过程：
 
-![](https://assets.ng-tech.icu/item/20230420134319.png)
+![](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/20230420134319.png)
 
 其中某个上架的链路，可能包含以下的流程：
 
-![](https://assets.ng-tech.icu/item/20230426174300.png)
+![](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/20230426174300.png)
 
 面对这种复杂的逻辑，我们首先想到的就是分治理念，譬如引入流程引擎等专门的 Pipeline 处理流程。不过在实践中，如 KISS（Keep It Simple and Stupid）原则所示，最好是什么工具都不要用，次之是用一个极简的 Pipeline 模式，最差是使用像流程引擎这样的重方法。除非你的应用有极强的流程可视化和编排的诉求，否则非常不推荐使用流程引擎等工具。第一，它会引入额外的复杂度，特别是那些需要持久化状态的流程引擎；第二，它会割裂代码，导致阅读代码的不顺畅。
 
@@ -14,7 +14,7 @@
 
 回到商品上架的问题，这里问题核心是工具吗？是设计模式带来的代码灵活性吗？显然不是，问题的核心应该是如何分解问题和抽象问题，知道金字塔原理的应该知道，此处，我们可以使用结构化分解将问题解构成一个有层级的金字塔结构：
 
-![](https://assets.ng-tech.icu/item/20230426101710.png)
+![](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/20230426101710.png)
 
 以商品上架为例，程序的入口是一个上架命令（OnSaleCommand）, 它由三个阶段（Phase）组成。
 
@@ -111,7 +111,7 @@ public class OnSaleProcessPhase {
 
 因此，在做过程分解的时候，我建议工程师不要把太多精力放在工具上，放在设计模式带来的灵活性上。而是应该多花时间在对问题分析，结构化分解，最后通过合理的抽象，形成合适的阶段（Phase）和步骤（Step）上。
 
-![](https://assets.ng-tech.icu/item/20230426100534.png)
+![](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/20230426100534.png)
 
 # 对象模型
 
@@ -165,4 +165,4 @@ if (backOffer.getStockAmount() < 1){
 
 通过上面的案例，我们可以看到有过程分解要好于没有分解，过程分解+对象模型要好于仅仅是过程分解。对于商品上架这个 case，如果采用过程分解+对象模型的方式，最终我们会得到一个如下的系统结构：
 
-![](https://assets.ng-tech.icu/item/20230420134256.png)
+![](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/20230420134256.png)
